@@ -167,6 +167,7 @@ cython_debug/
 
 # Ignore the .env file
 .env
+credentials.env
 
 # Ignore the logs directory
 logs/
