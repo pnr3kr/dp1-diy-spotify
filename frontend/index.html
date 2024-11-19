@@ -27,11 +27,19 @@
         method: "GET",
         dataType: "json", 
         success: function(data) {
-          for (var i = 0; i < data.song.length; i++) {
-            $("#player").append("<img src='" + data.song[i].image + "' width='100' height='100' style='float:left;margin:10px;' />");
-            $("#player").append("<h3>" + data.song[i].title + "</h3>");
-            $("#player").append("<p>" + data.song[i].artist + " | <i>" + data.song[i].album + "</i> | " + data.song[i].year + " | " + data.song[i].genre + "</p>");
-            $("#player").append("<audio controls><source src='" + data.song[i].file + "' type='audio/mpeg'></audio>");
+
+	console.log("API Response:", data); // Debugging log
+
+	if (!data || !data.songs) {
+          console.error("Invalid data structure:", data);
+          return; // Exit early if the structure is incorrect
+    }
+
+          for (var i = 0; i < data.songs.length; i++) {
+            $("#player").append("<img src='" + data.songs[i].image + "' width='100' height='100' style='float:left;margin:10px;' />");
+            $("#player").append("<h3>" + data.songs[i].title + "</h3>");
+            $("#player").append("<p>" + data.songs[i].artist + " | <i>" + data.songs[i].album + "</i> | " + data.songs[i].year + " | " + data.songs[i].genre + "</p>");
+            $("#player").append("<audio controls><source src='" + data.songs[i].file + "' type='audio/mpeg'></audio>");
             $("#player").append("<hr size=1 /><br>");
           }
           console.log(data);
